@@ -1,0 +1,1047 @@
+/* --- 1. Foundational Styles & Theme Variables --- */
+:root {
+  /* Light Theme */
+  --bg-color: #f4f4f5;
+  --text-color: #18181b;
+  --header-bg: rgba(244, 244, 245, 0.8);
+  --card-bg: #ffffff;
+  --border-color: #e4e4e7;
+  --primary-color: #0071e3;
+
+  /* Universal */
+  --font-main: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+/* Dark Theme */
+.dark-mode {
+  --bg-color: #09090b;
+  --text-color: #f4f4f5;
+  --header-bg: rgba(9, 9, 11, 0.7);
+  --card-bg: #18181b;
+  --border-color: #27272a;
+  --primary-color: #3b82f6;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  cursor: none; /* Hide default cursor */
+}
+
+#app {
+  display: none; /* Hide app until loader is finished */
+  transition: opacity 0.5s ease-in-out;
+}
+
+/* --- 2. Loader  --- */
+.loader {
+  position: fixed;
+  inset: 0;
+  background-color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+}
+
+.loader-animation {
+  width: 40px;
+  height: 40px;
+  background-color: #fff;
+  animation: loader-anim 1.5s infinite ease-in-out;
+}
+
+@keyframes loader-anim {
+  0% { transform: scaleX(1); transform-origin: left; }
+  25% { transform: scaleX(2); transform-origin: left; }
+  50% { transform: scaleX(1) rotate(0deg); transform-origin: right; }
+  75% { transform: scaleX(1) rotate(90deg); transform-origin: bottom right; }
+  100% { transform: scaleX(1) rotate(90deg); transform-origin: bottom right; }
+}
+
+/* --- 4. Header & Navbar --- */
+.main-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: var(--header-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  height: 70px;
+}
+
+.nav-logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--text-color);
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  gap: 2.5rem;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: var(--text-color);
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.nav-link:hover {
+  color: var(--primary-color);
+}
+
+/* --- 5. Theme Toggle Button --- */
+.theme-toggle {
+  width: 24px;
+  height: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  color: var(--text-color);
+}
+
+.theme-toggle::before {
+  content: '☀️'; /* Sun icon */
+  font-size: 24px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.theme-toggle::after {
+  content: '🌙'; /* Moon icon */
+  font-size: 24px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.dark-mode .theme-toggle::before {
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+}
+
+.dark-mode .theme-toggle::after {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+}
+
+/* --- 6. Hamburger Menu (for Mobile) --- */
+.hamburger {
+  display: none;
+  cursor: pointer;
+}
+
+.bar {
+  display: block;
+  width: 25px;
+  height: 3px;
+  margin: 5px auto;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  background-color: var(--text-color);
+}
+
+/* --- 7. Responsiveness --- */
+@media (max-width: 768px) {
+  .nav-menu {
+    position: fixed;
+    left: -100%;
+    top: 70px;
+    flex-direction: column;
+    background-color: var(--bg-color);
+    width: 100%;
+    text-align: center;
+    transition: 0.3s;
+    gap: 2rem;
+    padding: 2rem 0;
+  }
+
+  .nav-menu.active {
+    left: 0;
+  }
+
+  .hamburger {
+    display: block;
+  }
+
+  .hamburger.active .bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger.active .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  .hamburger.active .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+}
+
+/* --- 8. Hero Section --- */
+#hero {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+  color: #ffffff; /* Text color for content on top of the dark 3D scene */
+}
+
+#hero-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1; /* Sits behind content */
+}
+
+.hero-content {
+  position: relative;
+  z-index: 3; /* Above the cards */
+  padding: 0 1rem;
+}
+
+.hero-title {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 700;
+  max-width: 900px;
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-bottom: 2rem;
+  color: #e0e0e0;
+}
+
+.cta-button {
+  display: inline-block;
+  background-color: var(--primary-color);
+  color: #fff;
+  padding: 1rem 2rem;
+  border-radius: 99px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.cta-button:hover {
+  transform: scale(1.05);
+}
+
+/* --- 9. Hero UI Cards (Programmatic) --- */
+.hero-ui-cards {
+  position: absolute;
+  inset: 0;
+  z-index: 2; /* Between canvas and main text */
+  pointer-events: none; /* Allows clicking through to canvas if needed */
+}
+
+.hero-card {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 1.5rem;
+  width: clamp(300px, 25vw, 380px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  text-align: left;
+  color: #f0f0f0;
+}
+
+.card-1 {
+  top: 15%;
+  left: 10%;
+}
+
+.card-2 {
+  bottom: 12%;
+  right: 8%;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.card-title {
+  font-weight: 600;
+  font-size: 1rem;
+  color: #fff;
+}
+
+.card-stat-up {
+  font-size: 0.9rem;
+  color: #4ade80; /* Green for 'up' */
+}
+
+.card-main-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+/* Bar Chart Styling */
+.bar-chart {
+  display: flex;
+  gap: 10px;
+  height: 80px;
+  align-items: flex-end;
+}
+
+.bar {
+  flex-grow: 1;
+  background-color: var(--primary-color);
+  border-radius: 4px;
+  opacity: 0.7;
+}
+
+/* Donut Chart Styling */
+.donut-chart-body {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.donut-chart {
+  --p: 100; /* Percentage, will be animated by GSAP from 0 to 100 */
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  position: relative;
+  display: grid;
+  place-items: center;
+  background: conic-gradient(
+    #3b82f6 calc(var(--p) * 0.35%),
+    #84cc16 0 calc(var(--p) * 0.60%),
+    #f97316 0 calc(var(--p) * 0.80%),
+    #a855f7 0 calc(var(--p) * 1%),
+    #4f4f52 0 /* The background color for the unfilled part */
+  );
+  transition: background 0.3s; /* For smooth hover effects if any */
+}
+
+.donut-chart::before {
+  content: '';
+  position: absolute;
+  width: 70%;
+  height: 70%;
+  background: #27272a; /* A darker shade from the card's backdrop */
+  border-radius: 50%;
+}
+
+.donut-total {
+  position: relative; /* To appear above the ::before pseudo-element */
+  z-index: 1;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.donut-legend {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  font-size: 0.9rem;
+}
+
+.donut-legend li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--color); /* Uses the CSS variable from the HTML */
+}
+
+/* --- 10. Hero Responsiveness --- */
+@media (max-width: 900px) {
+  .hero-ui-cards {
+    display: none; /* Hide cards on smaller screens to not clutter the view */
+  }
+}
+
+/* --- 11. Clients Section --- */
+#clients {
+  padding: 80px 0;
+  background-color: var(--bg-color);
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.section-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  text-align: center;
+}
+
+.section-eyebrow {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.section-heading {
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-weight: 700;
+  color: var(--text-color);
+  margin-bottom: 3rem;
+}
+
+.scroller {
+  max-width: 900px;
+  margin: auto;
+  overflow: hidden;
+  -webkit-mask: linear-gradient(
+    90deg,
+    transparent,
+    white 20%,
+    white 80%,
+    transparent
+  );
+  mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent);
+}
+
+.scroller__inner {
+  display: flex;
+  gap: 3rem;
+  list-style: none;
+  padding-block: 1rem;
+  animation: scroll 20s linear infinite;
+}
+
+@keyframes scroll {
+  to {
+    transform: translate(calc(-50% - 1.5rem)); /* 1.5rem is half the gap */
+  }
+}
+
+.tag-list li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tag-list img {
+  /* This is the key part to control logo size */
+  max-height: 40px; /* Adjust this value as needed */
+  width: auto;
+  filter: grayscale(1);
+  opacity: 0.6;
+  transition: filter 0.3s, opacity 0.3s;
+}
+
+.dark-mode .tag-list img {
+  filter: grayscale(1) invert(1); /* Invert colors for dark mode */
+}
+
+.tag-list img:hover {
+  filter: grayscale(0);
+  opacity: 1;
+}
+
+/* --- 12. Features (Tabs) Section --- */
+#features {
+  padding: 100px 0;
+  background-color: var(--bg-color);
+}
+
+.tabs-component {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 2rem;
+  max-width: 1000px;
+  margin: auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.dark-mode .tabs-component {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.tab-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.tab-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 99px;
+  border: 1px solid var(--border-color);
+  background-color: transparent;
+  color: var(--text-color);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.tab-btn:hover {
+  background-color: var(--border-color);
+}
+
+.tab-btn.active {
+  background-color: var(--primary-color);
+  color: #fff;
+  border-color: var(--primary-color);
+}
+
+.tab-content {
+  display: none;
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.tab-content.active {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+}
+
+.content-text {
+  flex: 1;
+  text-align: left;
+}
+
+.content-text h3 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.content-text p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--text-color);
+  opacity: 0.8;
+}
+
+.content-visual {
+  flex: 1;
+}
+
+/* Styling for the programmatic UI mockups */
+.mock-ui-window {
+  background-color: var(--bg-color);
+  border-radius: 8px;
+  padding: 1.5rem;
+  border: 1px solid var(--border-color);
+  min-height: 250px;
+  display: flex;
+  flex-direction: column;
+}
+
+.mock-ui-header {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 1.5rem;
+}
+
+.mock-ui-header::before,
+.mock-ui-header::after,
+.mock-ui-header span {
+  content: '';
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #ddd;
+}
+.dark-mode .mock-ui-header::before,
+.dark-mode .mock-ui-header::after,
+.dark-mode .mock-ui-header span {
+  background-color: #444;
+}
+
+.mock-ui-line {
+  height: 12px;
+  background-color: var(--border-color);
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.image-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.mock-ui-img {
+  height: 80px;
+  background-color: var(--border-color);
+  border-radius: 4px;
+}
+
+.logo-cloud {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  flex-grow: 1;
+}
+
+/* This rule ensures the logos are balanced and properly sized */
+.logo-cloud img {
+  max-height: 50px;
+  max-width: 100px;
+  width: auto;
+  object-fit: contain;
+  filter: grayscale(1);
+  opacity: 0.7;
+}
+.dark-mode .logo-cloud img {
+  filter: grayscale(1) invert(1);
+}
+
+/* --- 13. Features Section Responsiveness --- */
+@media (max-width: 768px) {
+  .tab-content.active {
+    flex-direction: column;
+    text-align: center;
+  }
+  .content-text {
+    text-align: center;
+  }
+}
+
+/* --- 14. Testimonials Section --- */
+#testimonials {
+  padding-top: 100px;
+  background-color: var(--bg-color);
+  overflow: hidden; /* Important for horizontal scroll */
+}
+
+/* --- 14. Testimonials Section (CSS Animation) --- */
+#testimonials {
+  padding: 100px 0;
+  background-color: var(--bg-color);
+  overflow: hidden;
+}
+
+/* This container now just centers the heading */
+.testimonials-container {
+  padding-bottom: 3rem;
+}
+
+/* The scroller creates the viewport with faded edges */
+.testimonial-scroller {
+  max-width: 100%;
+  overflow: hidden;
+  -webkit-mask: linear-gradient(90deg, transparent, white 10%, white 90%, transparent);
+  mask: linear-gradient(90deg, transparent, white 10%, white 90%, transparent);
+}
+
+/* The track holds the cards and has the animation applied */
+.testimonials-track-css {
+  display: flex;
+  width: max-content; /* Let the track be as wide as its content */
+  gap: 2rem;
+  padding-block: 1rem;
+  /* The animation itself */
+  animation: scroll-left 40s linear infinite;
+}
+
+@keyframes scroll-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    /* Move left by exactly half the container's width */
+    transform: translateX(calc(-50% - 1rem)); /* 1rem is half the gap */
+  }
+}
+
+/* Pause animation on hover for better UX */
+.testimonials-track-css:hover {
+  animation-play-state: paused;
+}
+
+/* Card styling remains largely the same */
+.testimonial-card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 2.5rem;
+  width: 450px;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.testimonial-card p {
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1.4;
+  margin-bottom: 2rem;
+}
+
+.testimonial-card .author {
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+/* --- 15. Case Study Slider Section --- */
+#cases {
+  position: relative;
+  padding: 100px 0;
+  background-color: #fff; /* Base background */
+  overflow: hidden;
+}
+
+.dark-mode #cases {
+  background-color: #111;
+}
+
+.case-study-background {
+  position: absolute;
+  inset: 0;
+  background-color: #e11d48; /* Initial pink/red color */
+  clip-path: polygon(0 0, 100% 20%, 100% 100%, 0 80%);
+  transition: background-color 0.6s ease;
+  z-index: 0;
+}
+
+.case-study-slider {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 2rem;
+}
+
+.slider-bg-number-wrapper {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  font-size: clamp(15rem, 30vw, 25rem);
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.15);
+  line-height: 1;
+  z-index: -1;
+  overflow: hidden; /* To hide the number during animation */
+}
+
+.slider-content {
+  grid-column: 1 / 3; /* Span both columns */
+  display: contents; /* Allows children to participate in the parent grid */
+}
+
+.slider-visual {
+  grid-column: 2 / 3;
+  grid-row: 1;
+  aspect-ratio: 1 / 1;
+  background-color: #333;
+  border: 4px solid #fff;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.slider-text {
+  grid-column: 1 / 2;
+  grid-row: 1;
+  color: #fff;
+}
+
+.slider-tags {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.slider-tags .tag {
+  border: 1px solid #fff;
+  padding: 0.25rem 0.75rem;
+  border-radius: 99px;
+  font-size: 0.9rem;
+}
+
+.slider-title {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 2rem;
+  max-width: 500px;
+}
+
+.slider-button {
+  background-color: #fff;
+  color: #111;
+  padding: 0.75rem 1.5rem;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 4px;
+  transition: transform 0.2s ease;
+  display: inline-block;
+}
+.slider-button:hover {
+  transform: scale(1.05);
+}
+
+.slider-nav {
+  grid-column: 1 / 3;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.nav-arrow {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.5);
+  background: transparent;
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.nav-arrow:hover {
+  background-color: rgba(255,255,255,0.1);
+}
+
+/* --- 16. Case Study Responsiveness --- */
+@media (max-width: 768px) {
+  .case-study-slider {
+    grid-template-columns: 1fr;
+  }
+  .slider-visual { grid-row: 1; }
+  .slider-text { grid-row: 2; text-align: center; margin-top: 2rem; }
+  .slider-bg-number-wrapper { display: none; }
+}
+
+/* --- 17. Case Study Visuals --- */
+.mock-visual-concert, .mock-visual-festival, .mock-visual-press {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+}
+.mock-visual-concert { background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDE0fHxjb25jZXJ0fGVufDB8fHx8MTY4MTExODU0Mw&ixlib=rb-4.0.3&q=80&w=400'); }
+.mock-visual-festival { background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1514525253161-7a46d19cd819?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDV8fGZlc3RpdmFsfGVufDB8fHx8MTY4MTExODU4MQ&ixlib=rb-4.0.3&q=80&w=400'); }
+.mock-visual-press { background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://www.financialexpress.com/wp-content/uploads/2025/06/1_635a76.png'); }
+
+/* --- 18. Pricing Section --- */
+#pricing {
+  padding: 100px 0;
+  background-color: var(--bg-color);
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  align-items: stretch;
+}
+
+.pricing-card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pricing-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+.dark-mode .pricing-card:hover {
+  box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+}
+
+.pricing-card.popular {
+  border-color: var(--primary-color);
+  position: relative;
+  transform: scale(1.05);
+}
+.pricing-card.popular:hover {
+  transform: scale(1.1) translateY(-10px);
+}
+
+.pricing-card.popular::before {
+  content: 'Most Popular';
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--primary-color);
+  color: #fff;
+  padding: 0.25rem 1rem;
+  border-radius: 99px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.plan-name { font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem; }
+.plan-price { font-size: 3rem; font-weight: 700; margin-bottom: 1rem; }
+.price-period { font-size: 1rem; font-weight: 500; color: var(--text-color); opacity: 0.6; }
+.plan-description { margin-bottom: 2rem; opacity: 0.8; flex-grow: 1; }
+.features-list { list-style: '✓'; margin-left: 1.5rem; margin-bottom: 2.5rem; }
+.features-list li { padding-left: 0.5rem; margin-bottom: 0.75rem; }
+
+.pricing-button {
+  display: block;
+  text-align: center;
+  width: 100%;
+  padding: 1rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  background-color: var(--primary-color);
+  color: #fff;
+  transition: transform 0.2s ease;
+}
+.pricing-card:not(.popular) .pricing-button {
+  background-color: transparent;
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+}
+
+
+/* --- 19. Footer --- */
+#footer {
+  background-color: var(--card-bg);
+  border-top: 1px solid var(--border-color);
+  padding: 80px 0 0;
+  color: var(--text-color);
+  opacity: 0.8;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 2rem;
+}
+
+.footer-col h4 { font-size: 1.1rem; margin-bottom: 1rem; }
+.footer-col p { line-height: 1.6; }
+.footer-col ul { list-style: none; }
+.footer-col ul li { margin-bottom: 0.75rem; }
+.footer-col a { text-decoration: none; color: inherit; }
+.footer-col a:hover { color: var(--primary-color); }
+.footer-logo { font-size: 1.5rem; font-weight: 700; }
+
+.footer-bottom {
+  border-top: 1px solid var(--border-color);
+  margin-top: 4rem;
+  padding: 1.5rem 2rem;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+/* --- 20. Final Responsiveness --- */
+@media (max-width: 768px) {
+  .footer-container {
+    grid-template-columns: 1fr 1fr;
+  }
+  .footer-col:first-child {
+    grid-column: 1 / 3;
+    text-align: center;
+  }
+}
+@media (max-width: 480px) {
+  .footer-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+}
+
+/* --- 3. Custom Cursor (REVISED FOR VISIBILITY) --- */
+.cursor {
+  width: 10px;   /* Smaller, solid dot */
+  height: 10px;
+  background-color: #fff; /* Solid white for high contrast */
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+}
+
+
+/* --- 21. Aura Cursor Effect=--- */
+.cursor-aura {
+  width: 50px;   /* Larger size */
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  position: fixed;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 9998;
+  opacity: 0.7; /* Higher opacity for more presence */
+  filter: blur(25px); /* More blur to soften the larger shape */
+}
