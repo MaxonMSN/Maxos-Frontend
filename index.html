@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Maxos </title>
+    <script type="module" crossorigin src="/Maxos-Frontend/assets/index-BZp_oBHH.js"></script>
+    <link rel="stylesheet" crossorigin href="/Maxos-Frontend/assets/index-3ZovFFX1.css">
+  </head>
+  <body>
+    <!-- MANDATORY: Loader -->
+    <div class="loader">
+      <!-- We will build the snake animation from Video 7 here with CSS -->
+      <div class="loader-animation"></div>
+    </div>
+
+    <!-- INNOVATION: Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor"></div>
+    <div class="cursor-aura"></div>
+
+    <div id="app">
+      <!-- MANDATORY: Navbar -->
+      <header class="main-header">
+        <nav class="navbar">
+          <a href="#" class="nav-logo">Maxos</a>
+          <ul class="nav-menu">
+            <li class="nav-item"><a href="#features" class="nav-link">Features</a></li>
+            <li class="nav-item"><a href="#cases" class="nav-link">Cases</a></li>
+            <li class="nav-item"><a href="#pricing" class="nav-link">Pricing</a></li>
+          </ul>
+          <button class="theme-toggle" aria-label="Toggle light and dark mode">
+            <!-- Icons  -->
+          </button>
+          <div class="hamburger">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+          </div>
+        </nav>
+      </header>
+
+      <main id="main-content">
+        <!-- 1. Hero Section -->
+        <section id="hero">
+          <!-- The canvas for our Three.js 3D background -->
+          <canvas id="hero-canvas"></canvas>
+
+          <div class="hero-content">
+            <h1 class="hero-title">
+              Create reports, forecasts, dashboards & consolidations
+            </h1>
+            <p class="hero-subtitle">Now with AI-insights</p>
+            <a href="#pricing" class="cta-button">Start 14-day free trial ></a>
+          </div>
+
+          <!-- Floating UI Cards - Built with pure HTML/CSS -->
+          <div class="hero-ui-cards">
+            
+            <!-- Card 1:  Bar Chart UI -->
+            <div class="hero-card card-1">
+              <div class="card-header">
+                <div class="card-title-group">
+                  <p class="card-title">Total Income</p>
+                  <span class="card-stat-up">↑ 36.5%</span>
+                </div>
+                <div class="card-icon-settings">⚙️</div>
+              </div>
+              <div class="card-body">
+                <p class="card-main-value">$426.8K</p>
+                <div class="bar-chart">
+                  <!-- Bars will be styled divs -->
+                  <div class="bar" style="height: 40%;"></div>
+                  <div class="bar" style="height: 60%;"></div>
+                  <div class="bar" style="height: 30%;"></div>
+                  <div class="bar" style="height: 80%;"></div>
+                  <div class="bar" style="height: 55%;"></div>
+                  <div class="bar" style="height: 70%;"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 2: Replicating the Donut Chart UI -->
+            <div class="hero-card card-2">
+              <div class="card-header">
+                <p class="card-title">Expenses</p>
+                <div class="card-icon-settings">⚙️</div>
+              </div>
+              <div class="card-body donut-chart-body">
+                <!-- Donut chart will be a single div styled with conic-gradient -->
+                <div class="donut-chart">
+                  <span class="donut-total">$56.2K</span>
+                </div>
+                <ul class="donut-legend">
+                  <li><span class="legend-dot" style="--color: #3b82f6;"></span>Insurance</li>
+                  <li><span class="legend-dot" style="--color: #84cc16;"></span>Wages</li>
+                  <li><span class="legend-dot" style="--color: #f97316;"></span>Rent</li>
+                  <li><span class="legend-dot" style="--color: #a855f7;"></span>Other</li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+        </section>
+          <!-- 2. Clients Section -->
+        <section id="clients">
+          <div class="section-container">
+            <h3 class="section-eyebrow">Trusted By The Best</h3>
+            <h2 class="section-heading">Powering The World's Most Innovative Teams</h2>
+            <div class="scroller" data-speed="slow">
+              <ul class="tag-list scroller__inner">
+                <!-- 
+                  For logos, find simple SVG versions online or create them. 
+                  Save them in `public/assets/images/`.
+                  Examples: "simpleicons.org" is a good resource.
+                -->
+                <li><img src="/Maxos-Frontend/assets/images/openai-svgrepo-com.svg" alt="OpenAI"></li>              
+                <li><img src="/Maxos-Frontend/assets/images/microsoft-svgrepo-com.svg" alt="Microsoft"></li>
+                <li><img src="/Maxos-Frontend/assets/images/notion-svgrepo-com.svg" alt="Notion"></li>
+                <li><img src="/Maxos-Frontend/assets/images/linkedin-svgrepo-com.svg" alt="LinkdIn"></li>
+                <li><img src="/Maxos-Frontend/assets/images/tesla-svgrepo-com.svg" alt="Tesla"></li>
+                <li><img src="/Maxos-Frontend/assets/images/google-color-svgrepo-com.svg" alt="Google"></li>
+                <li><img src="/Maxos-Frontend/assets/images/amazon-color-svgrepo-com.svg" alt="Amazon"></li>
+
+              </ul>
+            </div>
+          </div>
+        </section>
+
+                <!-- 3. Features Section (Tabs) -->
+        <section id="features">
+          <div class="section-container">
+            <h3 class="section-eyebrow">Maxos Features</h3>
+            <h2 class="section-heading">All Your Business Intelligence Needs, In One Place</h2>
+            
+            <div class="tabs-component">
+              <div class="tab-buttons">
+                <button class="tab-btn active" data-tab="1">
+                  <span class="tab-icon">📊</span> Real-Time Analytics
+                </button>
+                <button class="tab-btn" data-tab="2">
+                  <span class="tab-icon">🤖</span> Creative Automation
+                </button>
+                <button class="tab-btn" data-tab="3">
+                  <span class="tab-icon">☁️</span> Cloud Integration
+                </button>
+              </div>
+
+              <div class="tab-content-area">
+                <!-- Content for Tab 1 -->
+                <div class="tab-content active" data-tab="1">
+                  <div class="content-text">
+                    <h3>Instantaneous, Accurate Insights</h3>
+                    <p>Connect your data sources and get a real-time view of your business performance. Track KPIs, monitor trends, and make data-driven decisions with confidence.</p>
+                  </div>
+                  <div class="content-visual">
+                    <div class="mock-ui-window">
+                      <div class="mock-ui-header"></div>
+                      <div class="mock-ui-content">
+                        <div class="mock-ui-line" style="width: 80%"></div>
+                        <div class="mock-ui-line" style="width: 90%"></div>
+                        <div class="mock-ui-line" style="width: 60%"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Content for Tab 2 -->
+                <div class="tab-content" data-tab="2">
+                  <div class="content-text">
+                    <h3>AI-Powered Creative Generation</h3>
+                    <p>Automatically generate stunning, on-brand reports and social media assets from your data. Say goodbye to tedious manual design work and hello to scalable creative.</p>
+                  </div>
+                  <div class="content-visual">
+                    <div class="mock-ui-window">
+                      <div class="mock-ui-header"></div>
+                      <div class="mock-ui-content image-grid">
+                        <div class="mock-ui-img"></div>
+                        <div class="mock-ui-img"></div>
+                        <div class="mock-ui-img"></div>
+                        <div class="mock-ui-img"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Content for Tab 3 -->
+                <div class="tab-content" data-tab="3">
+                  <div class="content-text">
+                    <h3>Seamless Cloud Connectivity</h3>
+                    <p>Maxos integrates effortlessly with the tools you already use. Connect QuickBooks, Xero, Sage, and more in just a few clicks for a unified view of your finances.</p>
+                  </div>
+                  <div class="content-visual">
+                    <div class="mock-ui-window">
+                      <div class="mock-ui-header"></div>
+                      <div class="mock-ui-content logo-cloud">
+                        <img src="/Maxos-Frontend/assets/images/brand-quickbooks-svgrepo-com.svg" alt="QuickBooks">
+                        <img src="/Maxos-Frontend/assets/images/xero-svgrepo-com.svg" alt="Xero">
+                        <img src="/Maxos-Frontend/assets/images/sage-paying-card-svgrepo-com.svg" alt="Sage">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      
+                <!-- 4. Testimonials Section (Horizontal Scroll) -->
+        <section id="testimonials">
+          <div class="section-container testimonials-container">
+            <h3 class="section-eyebrow">From Our Customers</h3>
+            <h2 class="section-heading">Why Teams Love Maxos</h2>
+          </div>
+          <div class="testimonial-scroller">
+            <div class="testimonials-track-css">
+              <!-- Cards are still here -->
+              <div class="testimonial-card">
+                <p>"The automated feedback system runs quietly in the background, and we've noticed our ratings stay more consistent without needing to chase anything manually. It's been a great fit for our team and a time-saver we didn't know we needed."</p>
+                <div class="author">- Sophie Wilson, USA</div>
+              </div>
+              <div class="testimonial-card">
+                <p>"I run a small store on the side, and honestly, I don't have time to check performance every day. Maxos shows me what's happening without needing to dig through reports. The AI insights are a game-changer."</p>
+                <div class="author">- Mark Bosman, UK</div>
+              </div>
+              <div class="testimonial-card">
+                <p>"As a beginner, the tools are simple enough, but powerful once you grow. I didn't even know review requests could be automated until I found Maxos. Now I can spend more time learning how to improve my store."</p>
+                <div class="author">- Emily James, Canada</div>
+              </div>
+              <div class="testimonial-card">
+                <p>"Connecting our financial data was seamless. Within minutes, we had a dashboard that was more insightful than what our previous agency provided in a month. Highly recommended."</p>
+                <div class="author">- David Chen, Australia</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+                <!-- 5. Case Studies Section -->
+        <section id="cases">
+          <!-- This div will have the dynamic background color -->
+          <div class="case-study-background"></div>
+
+          <div class="case-study-slider">
+            <!-- The large animated number in the background -->
+            <div class="slider-bg-number-wrapper">
+              <div class="slider-bg-number">01</div>
+            </div>
+
+            <!-- The content that changes with each slide -->
+            <div class="slider-content">
+              <div class="slider-visual">
+                <!-- Programmatic visual for the case study -->
+                <div class="mock-visual-concert"></div>
+              </div>
+              <div class="slider-text">
+                <div class="slider-tags">
+                  <span class="tag">Bharat</span>
+                  <span class="tag">2025 Event</span>
+                </div>
+                <h2 class="slider-title">Getting to it  2025</h2>
+                <a href="#" class="slider-button">Read More →</a>
+              </div>
+            </div>
+
+            <!-- Navigation controls -->
+            <div class="slider-nav">
+              <button class="nav-arrow prev-arrow" aria-label="Previous case study">←</button>
+              <button class="nav-arrow next-arrow" aria-label="Next case study">→</button>
+            </div>
+          </div>
+        </section>
+
+                <!-- 6. Pricing Section -->
+        <section id="pricing">
+          <div class="section-container">
+            <h3 class="section-eyebrow">Pricing Plans</h3>
+            <h2 class="section-heading">Choose The Right Plan For Your Business</h2>
+            <div class="pricing-grid">
+              
+              <div class="pricing-card">
+                <h3 class="plan-name">Starter</h3>
+                <p class="plan-price">$29<span class="price-period">/mo</span></p>
+                <p class="plan-description">For individuals and small teams getting started with data analytics.</p>
+                <ul class="features-list">
+                  <li>Up to 5 Data Sources</li>
+                  <li>Basic Dashboards</li>
+                  <li>Email Support</li>
+                </ul>
+                <a href="#" class="pricing-button">Get Started</a>
+              </div>
+
+              <div class="pricing-card popular">
+                <h3 class="plan-name">Growth</h3>
+                <p class="plan-price">$99<span class="price-period">/mo</span></p>
+                <p class="plan-description">For growing businesses that need more power and automation.</p>
+                <ul class="features-list">
+                  <li>Up to 25 Data Sources</li>
+                  <li>Advanced AI Insights</li>
+                  <li>Priority Support</li>
+                  <li>API Access</li>
+                </ul>
+                <a href="#" class="pricing-button">Choose Plan</a>
+              </div>
+
+              <div class="pricing-card">
+                <h3 class="plan-name">Enterprise</h3>
+                <p class="plan-price">Contact Us</p>
+                <p class="plan-description">For large organizations with custom needs and security requirements.</p>
+                <ul class="features-list">
+                  <li>Unlimited Data Sources</li>
+                  <li>Dedicated Account Manager</li>
+                  <li>On-Premise Deployment</li>
+                  <li>SSO & Advanced Security</li>
+                </ul>
+                <a href="#" class="pricing-button">Contact Sales</a>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        <!-- 7. Footer -->
+        <footer id="footer">
+          <div class="footer-container">
+            <div class="footer-col">
+              <a href="#" class="footer-logo">Maxos</a>
+              <p>The all-in-one business intelligence platform.</p>
+            </div>
+            <div class="footer-col">
+              <h4>Product</h4>
+              <ul>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#cases">Case Studies</a></li>
+              </ul>
+            </div>
+            <div class="footer-col">
+              <h4>Company</h4>
+              <ul>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Careers</a></li>
+                <li><a href="#">Contact</a></li>
+              </ul>
+            </div>
+            <div class="footer-col">
+              <h4>Social</h4>
+              <ul>
+                <li><a href="#">Twitter</a></li>
+                <li><a href="#">LinkedIn</a></li>
+                <li><a href="#">GitHub</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="footer-bottom">
+            <p>© 2025 Maxos, Inc. All rights reserved.</p>
+          </div>
+        </footer>
+
+      </main>
+    </div>
+  </body>
+</html>
